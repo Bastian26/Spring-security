@@ -1,10 +1,10 @@
-package com.mybytes.springsecuritybasic;
+package com.mybytes.springsection2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringsecuritybasicApplicationTests {
+class MyBytesBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
