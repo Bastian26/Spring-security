@@ -28,28 +28,4 @@ public class ProjectSecurityConfig {
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
-    // Denying all the requests
-    /*@Profile("prod")
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChainProd(HttpSecurity http) throws Exception {
-        http.authorizeRequests((requests) -> requests
-                        .anyRequest().denyAll()) // Alle Anfragen werden abgelehnt
-                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
-                .exceptionHandling((exceptions) -> exceptions
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))); // Fehlermeldung für unautorisierte Anfragen
-        return http.build();
-    }*/
-
-    // Allow all the requests
-    /*@Profile("prod")
-    @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests((requests) -> requests
-                        .anyRequest().permitAll()) // Alle Anfragen werden abgelehnt
-                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults());
-        return http.build();
-    }*/
 }
