@@ -18,9 +18,6 @@ public class ProjectSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChainDev(HttpSecurity http) throws Exception {
 
-        /**
-         * Custom configurations as per our requirement
-         */
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
                 .requestMatchers("/notices", "/contact").permitAll()) //All these can access without authentication
@@ -29,25 +26,25 @@ public class ProjectSecurityConfig {
         return http.build();
     }
 
-    // Denying all the requests
-    @Profile("prod")
+    // Allow all Requests
+    @Profile("development")
     @Bean
-    SecurityFilterChain defaultSecurityFilterChainProd(HttpSecurity http) throws Exception {
-        http.authorizeRequests((requests) -> requests
-                        .anyRequest().denyAll()) // Alle Anfragen werden abgelehnt
+    SecurityFilterChain defaultSecurityFilterChainAllowAll(HttpSecurity http) throws Exception {
+
+        http.authorizeHttpRequests((requests) -> requests
+                        .anyRequest().permitAll())
                 .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
-                .exceptionHandling((exceptions) -> exceptions
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))); // Fehlermeldung für unautorisierte Anfragen
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
-    // Allow all the requests
-    @Profile("prod")
+    // Deny all Requests
+    @Profile("development")
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests((requests) -> requests
-                        .anyRequest().permitAll()) // Alle Anfragen werden abgelehnt
+    SecurityFilterChain defaultSecurityFilterChainDenyAll(HttpSecurity http) throws Exception {
+
+        http.authorizeHttpRequests((requests) -> requests
+                        .anyRequest().denyAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
