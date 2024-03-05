@@ -30,7 +30,7 @@ public class ProjectSecurityConfig {
     }
 
     // Denying all the requests
-    @Profile("prod")
+    /*@Profile("prod")
     @Bean
     SecurityFilterChain defaultSecurityFilterChainProd(HttpSecurity http) throws Exception {
         http.authorizeRequests((requests) -> requests
@@ -40,10 +40,10 @@ public class ProjectSecurityConfig {
                 .exceptionHandling((exceptions) -> exceptions
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))); // Fehlermeldung für unautorisierte Anfragen
         return http.build();
-    }
+    }*/
 
     // Allow all the requests
-    @Profile("prod")
+    /*@Profile("prod")
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests((requests) -> requests
@@ -51,5 +51,5 @@ public class ProjectSecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
-    }
+    }*/
 }
