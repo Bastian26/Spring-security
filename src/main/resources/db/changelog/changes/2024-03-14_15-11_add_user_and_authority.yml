@@ -1,0 +1,16 @@
+databaseChangeLog:
+  # Insert into users table with IGNORE
+  - changeSet:
+      id: 4
+      author: Bastian
+      changes:
+        - sql:
+            sql: INSERT IGNORE INTO users VALUES (NULL, 'happy', '12345', '1')
+
+  # Insert into authorities table with IGNORE
+  - changeSet:
+      id: 5
+      author: Bastian
+      changes:
+        - sql:
+            sql: INSERT IGNORE INTO authorities VALUES (NULL, 'happy', 'write')

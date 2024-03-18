@@ -1,0 +1,89 @@
+databaseChangeLog:
+  # create table users
+  - changeSet:
+      id: 1
+      author: Bastian
+      changes:
+        - createTable:
+            tableName: users
+            ifNotExists: true
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(45)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+
+  # create table authorities
+  - changeSet:
+      id: 2
+      author: Bastian
+      changes:
+        - createTable:
+            tableName: authorities
+            ifNotExists: true
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+
+  # makes sure that no double combinations of username - authroity in authorities can exists
+  - changeSet:
+      id: 3
+      author: Bastian
+      changes:
+        - addUniqueConstraint:
+            constraintName: ix_auth_username
+            columnNames: username, authority
+            tableName: authorities
+
+
+
+ # -- Tabelle "users"
+ # CREATE TABLE users (
+ # id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ # username VARCHAR(50) NOT NULL,
+ # password VARCHAR(500) NOT NULL,
+ # enabled BOOLEAN NOT NULL,
+ # CONSTRAINT uc_users_username UNIQUE (username)
+ # );
+
+ # -- Tabelle "authorities"
+ # CREATE TABLE authorities (
+ # id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ # username VARCHAR(50) NOT NULL,
+ # authority VARCHAR(50) NOT NULL,
+ # CONSTRAINT uc_authorities_username_authority UNIQUE (username, authority)
+ # );
