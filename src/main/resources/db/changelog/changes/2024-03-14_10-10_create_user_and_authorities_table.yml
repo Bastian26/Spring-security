@@ -87,3 +87,5 @@ databaseChangeLog:
  # authority VARCHAR(50) NOT NULL,
  # CONSTRAINT uc_authorities_username_authority UNIQUE (username, authority)
  # );
+
+  # create unique index ix_auth_username on authorities (username,authority);
