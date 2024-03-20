@@ -15,5 +15,7 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect # Dialekt für MySQL-Datenbank
         format_sql: true # Optionale Einstellung für schön formatierten SQL-Output
         show_sql: true # Einstellung, um SQL-Anfragen in der Konsole anzuzeigen
+        use_sql_comments: true
+
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yml

@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
-@EnableWebSecurity
+//@EnableWebSecurity
 @Configuration
 public class ProjectSecurityConfig {
 
@@ -31,51 +31,23 @@ public class ProjectSecurityConfig {
 
         /**
          * Custom configurations as per our requirement
+         * .csrf(csrf -> csrf.disable()) -> disable to do post update requests (not default)
          */
-        http.authorizeHttpRequests((requests) -> requests
+        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                .requestMatchers("/notices", "/contact").permitAll()) //All these can access without authentication
+                .requestMatchers("/notices", "/contact", "/register").permitAll()) //All these can access without authentication
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
-
-   /* @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        *//*UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("12345")
-                .authorities("admin")
-                .build();
-
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("12345")
-                .authorities("read")
-                .build();
-
-        return  new InMemoryUserDetailsManager(admin, user);*//*
-
-        // Approach 2 where we use NoOpPasswordEncoder Bean wile creating the user details
-        UserDetails admin = User.withUsername("admin")
-                .password("12345")
-                .authorities("admin")
-                .build();
-
-        UserDetails user = User.withUsername("user")
-                .password("12345")
-                .authorities("read")
-                .build();
-
-        return  new InMemoryUserDetailsManager(admin, user);
-    }*/
-
-    @Bean
+    // not necessaey anymore beacause we have created our own UserDetails
+    /*@Bean
     public UserDetailsService userDetailsService(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
-    }
+    }*/
 
+    // at the moment we dont want encrypted passwords - shouldn't be in productive!
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
