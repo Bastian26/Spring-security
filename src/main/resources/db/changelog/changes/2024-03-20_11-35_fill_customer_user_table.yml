@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-03-20_11-35_fill_customer_user_table
+      author: Bastian
+      comment: "add initial value to customer"
+      changes:
+        - insert:
+            tableName: customer
+            columns:
+              - column:
+                  name: email
+                  value: "johndoe@example.com"
+              - column:
+                  name: pwd
+                  value: "54321"
+              - column:
+                  name: role
+                  value: "admin"
+
+
+# INSERT INTO customer (email, pwd, role) VALUES ('johndoe@example.com', '54321', 'admin');

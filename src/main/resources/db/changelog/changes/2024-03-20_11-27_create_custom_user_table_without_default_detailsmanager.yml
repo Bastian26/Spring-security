@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-03-20_11-27_create_custom_user_table_without_default_detailsmanager
+      author: Bastian
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pwd
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(45)
+                  constraints:
+                    nullable: false
