@@ -28,14 +28,14 @@ public class MyBankUserDetails implements UserDetailsService {
         String userName, password = null;
         // GrantedAuthority is form spring security - e.c. read, write ...
         List<GrantedAuthority> authorities = null;
-        List<Customer> customer = customerRepository.findAllByEmail(username);
-        if (customer.size() == 0) {
+        Customer customer = customerRepository.findByEmail(username);
+        if (customer == null) {
             throw new UsernameNotFoundException(String.format("User details not found for the user:%s", username));
         } else {
-            userName = customer.get(0).getEmail();
-            password = customer.get(0).getPwd();
+            userName = customer.getEmail();
+            password = customer.getPwd();
             authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(customer.get(0).getRole()));
+            authorities.add(new SimpleGrantedAuthority(customer.getRole()));
         }
         // Returns a user with the fetched values from the db (it's an existing user in the system form our custom security db)
         return new User(userName, password, authorities);

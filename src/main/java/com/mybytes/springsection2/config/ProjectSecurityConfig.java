@@ -42,7 +42,7 @@ public class ProjectSecurityConfig {
         return http.build();
     }
 
-    // not necessary anymore beacause we have created our own UserDetails
+    // not necessary anymore beacause we have created our own UserDetails which is managed by spring (service)
     /*@Bean
     public UserDetailsService userDetailsService(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
