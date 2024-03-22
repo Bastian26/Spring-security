@@ -15,8 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//not used yes, because we still have and use MyBankUserDetails
-//@Component
+@Component
 public class EazyBankUsernamePwdAuthenticationProvider implements AuthenticationProvider {
 
     private CustomerRepository customerRepository;
@@ -34,7 +33,7 @@ public class EazyBankUsernamePwdAuthenticationProvider implements Authentication
         Customer customer = customerRepository.findByEmail(username);
 
         // checks if user in db exists
-        if (customer == null) {
+        if (customer != null) {
             // checks if password matches with db password of the user
             if (passwordEncoder.matches(pwd, customer.getPwd())) {
                 List<GrantedAuthority> authorities = new ArrayList<>();
